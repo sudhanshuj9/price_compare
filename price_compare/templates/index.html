@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            font-size: 16px;
+            width: 300px;
+        }
+
+        button[type="submit"] {
+            padding: 5px 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 30px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .result h2 {
+            margin-bottom: 10px;
+        }
+
+        .result p {
+            margin: 5px 0;
+        }
+
+        .no-product {
+            color: #FF0000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Product Search</h1>
+    <form method="POST">
+        <label for="product_name">Product Name:</label>
+        <input type="text" id="product_name" name="product_name" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if flipkart_name and flipkart_price %}
+        <div class="result">
+            <h2>Flipkart:</h2>
+            <p>Name: {{ flipkart_name }}</p>
+            <p>Price: ₹{{ flipkart_price }}</p>
+        </div>
+    {% else %}
+        <div class="result no-product">
+            <p>No product found on Flipkart!</p>
+        </div>
+    {% endif %}
+
+    {% if amazon_name and amazon_price %}
+        <div class="result">
+            <h2>Amazon:</h2>
+            <p>Name: {{ amazon_name }}</p>
+            <p>Price: ₹{{ amazon_price }}</p>
+        </div>
+    {% else %}
+        <div class="result no-product">
+            <p>No product found on Amazon!</p>
+        </div>
+    {% endif %}
+</body>
+</html>
