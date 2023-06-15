@@ -1,91 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Product Search</title>
+    <title>Price Dekho - Product Search</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: Open Sans Condensed, sans-serif;
+            margin: 0;
         }
 
-        h1 {
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .logo {
             text-align: center;
+            margin-bottom: 20px;
         }
 
-        form {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        input[type="text"] {
-            padding: 5px;
-            font-size: 16px;
+        .logo img {
             width: 300px;
+            height: 100px;
         }
 
-        button[type="submit"] {
-            padding: 5px 10px;
+        .search-container {
+            text-align: center;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px;
             font-size: 16px;
-            background-color: #4CAF50;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #43d500;
             color: #fff;
             border: none;
+            border-radius: 4px;
             cursor: pointer;
-        }
-
-        .result {
-            margin-top: 30px;
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
-
-        .result h2 {
-            margin-bottom: 10px;
-        }
-
-        .result p {
-            margin: 5px 0;
-        }
-
-        .no-product {
-            color: #FF0000;
-            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <h1>Product Search</h1>
-    <form method="POST">
-        <label for="product_name">Product Name:</label>
-        <input type="text" id="product_name" name="product_name" required>
-        <button type="submit">Search</button>
-    </form>
-
-    {% if flipkart_name and flipkart_price %}
-        <div class="result">
-            <h2>Flipkart:</h2>
-            <p>Name: {{ flipkart_name }}</p>
-            <p>Price: ₹{{ flipkart_price }}</p>
+    <div class="container">
+        <div class="logo">
+            <img src="price_dekho_logo1.jpeg" alt="Price Dekho">
         </div>
-    {% else %}
-        <div class="result no-product">
-            <p>No product found on Flipkart!</p>
+        <div class="search-container">
+            <form method="POST" action="/results">
+                <input type="text" class="search-input" name="product_name" placeholder="Search for a product..." required>
+                <br>
+                <button type="submit" class="search-button">Search</button>
+            </form>
         </div>
-    {% endif %}
-
-    {% if amazon_name and amazon_price %}
-        <div class="result">
-            <h2>Amazon:</h2>
-            <p>Name: {{ amazon_name }}</p>
-            <p>Price: ₹{{ amazon_price }}</p>
-        </div>
-    {% else %}
-        <div class="result no-product">
-            <p>No product found on Amazon!</p>
-        </div>
-    {% endif %}
+    </div>
 </body>
 </html>
