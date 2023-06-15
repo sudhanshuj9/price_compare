@@ -28,62 +28,62 @@
             margin-bottom: 10px;
         }
 
-        .product p {
-            margin: 5px 0;
-        }
-
-        .no-product {
-            color: #FF0000;
+        .product .name {
+            font-size: 18px;
             font-weight: bold;
         }
 
-        .price-difference {
-            margin-top: 20px;
-            text-align: center;
-            font-weight: bold;
+        .product .price {
+            margin-top: 5px;
+            font-size: 16px;
         }
 
-        .know-more-button {
+        .product .buy-link {
             display: inline-block;
             padding: 5px 10px;
-            background-color: #43d500;
+            margin-top: 10px;
+            background-color: #4285F4;
             color: #fff;
             text-decoration: none;
             border-radius: 4px;
             cursor: pointer;
         }
+
+        .affordable {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .affordable h2 {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
     <h1>Product Search Results</h1>
+
     <div class="result">
         <div class="product">
             <h2>Flipkart</h2>
-            {% if flipkart_name == "No product found!" %}
-                <p class="no-product">{{ flipkart_name }}</p>
-            {% else %}
-                <p>{{ flipkart_name }}</p>
-                <p>Price: &#x20B9; {{ flipkart_price }}</p>
-                {% if flipkart_url %}
-                    <a href="{{ flipkart_url }}" target="_blank" class="know-more-button">Know more</a>
-                {% endif %}
+            <div class="name">{{ flipkart_name }}</div>
+            <div class="price">Price: ₹{{ flipkart_price }}</div>
+            {% if flipkart_url %}
+            <a href="{{ flipkart_url }}" class="buy-link" target="_blank">Buy on Flipkart</a>
             {% endif %}
         </div>
         <div class="product">
             <h2>Amazon</h2>
-            {% if amazon_name == "No product found!" %}
-                <p class="no-product">{{ amazon_name }}</p>
-            {% else %}
-                <p>{{ amazon_name }}</p>
-                <p>Price: &#x20B9; {{ amazon_price }}</p>
-                {% if amazon_url %}
-                    <a href="{{ amazon_url }}" target="_blank" class="know-more-button">Know more</a>
-                {% endif %}
+            <div class="name">{{ amazon_name }}</div>
+            <div class="price">Price: ₹{{ amazon_price }}</div>
+            {% if amazon_url %}
+            <a href="{{ amazon_url }}" class="buy-link" target="_blank">Buy on Amazon</a>
             {% endif %}
         </div>
     </div>
-    <p class="price-difference">
-        Price Difference: &#x20B9; {{ price_difference }}
-    </p>
+
+    <div class="affordable">
+        <h2>Most Affordable Website:</h2>
+        <div>{{ affordable_website }}</div>
+    </div>
 </body>
 </html>

@@ -93,8 +93,20 @@ def results():
 
     price_difference = flipkart_price - amazon_price
 
+    # Determine which website is more affordable
+    if flipkart_price == 0 and amazon_price == 0:
+        affordable_website = "No product found!"
+    elif flipkart_price == 0:
+        affordable_website = "Amazon"
+    elif amazon_price == 0:
+        affordable_website = "Flipkart"
+    elif flipkart_price < amazon_price:
+        affordable_website = "Flipkart"
+    else:
+        affordable_website = "Amazon"
+
     return render_template('results.html', flipkart_name=flipkart_name, flipkart_price=flipkart_price,
-                           amazon_name=amazon_name, amazon_price=amazon_price, price_difference=price_difference,
+                           amazon_name=amazon_name, amazon_price=amazon_price, affordable_website=affordable_website,
                            flipkart_url=flipkart_url, amazon_url=amazon_url)
 
 
