@@ -28,6 +28,7 @@
             margin-bottom: 10px;
         }
 
+
         .product .name {
             font-size: 18px;
             font-weight: bold;
@@ -56,11 +57,27 @@
 
         .affordable h2 {
             margin-bottom: 10px;
+
+        .product p {
+            margin: 5px 0;
+        }
+
+        .no-product {
+            color: #FF0000;
+            font-weight: bold;
+        }
+
+        .price-difference {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+
         }
     </style>
 </head>
 <body>
     <h1>Product Search Results</h1>
+
 
     <div class="result">
         <div class="product">
@@ -85,5 +102,34 @@
         <h2>Most Affordable Website:</h2>
         <div>{{ affordable_website }}</div>
     </div>
+
+    {% if flipkart_name and flipkart_price and amazon_name and amazon_price %}
+        <div class="result">
+            <div class="product">
+                <h2>Flipkart:</h2>
+                <p>Name: {{ flipkart_name }}</p>
+                <p>Price: ₹{{ flipkart_price }}</p>
+            </div>
+            <div class="product">
+                <h2>Amazon:</h2>
+                <p>Name: {{ amazon_name }}</p>
+                <p>Price: ₹{{ amazon_price }}</p>
+            </div>
+        </div>
+        <div class="price-difference">
+            {% if price_difference > 0 %}
+                Flipkart is ₹{{ price_difference }} more expensive than Amazon.
+            {% elif price_difference < 0 %}
+                Amazon is ₹{{ -price_difference }} more expensive than Flipkart.
+            {% else %}
+                Prices on Flipkart and Amazon are the same.
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="result no-product">
+            <p>No product found!</p>
+        </div>
+    {% endif %}
+
 </body>
 </html>

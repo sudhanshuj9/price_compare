@@ -71,6 +71,7 @@ def index():
     return render_template('index.html')
 
 
+
 @app.route('/results', methods=['POST'])
 def results():
     product_name = request.form.get('product_name')
@@ -88,10 +89,30 @@ def results():
         amazon_name = "No product found!"
         amazon_price = '0'
         amazon_url = None
+
+
+
+@app.route('/results', methods=['POST'])
+def results():
+    product_name = request.form.get('product_name')
+    flipkart_name, flipkart_price = flipkart(product_name)
+    amazon_name, amazon_price = amazon(product_name)
+
+    if flipkart_name is None:
+        flipkart_name = "No product found!"
+        flipkart_price = '0'
+    else:
+        flipkart_price = convert(flipkart_price)
+
+    if amazon_name is None:
+        amazon_name = "No product found!"
+        amazon_price = '0'
+
     else:
         amazon_price = convert(amazon_price)
 
     price_difference = flipkart_price - amazon_price
+
 
     # Determine which website is more affordable
     if flipkart_price == 0 and amazon_price == 0:
@@ -108,6 +129,9 @@ def results():
     return render_template('results.html', flipkart_name=flipkart_name, flipkart_price=flipkart_price,
                            amazon_name=amazon_name, amazon_price=amazon_price, affordable_website=affordable_website,
                            flipkart_url=flipkart_url, amazon_url=amazon_url)
+
+    return render_template('results.html', flipkart_name=flipkart_name, flipkart_price=flipkart_price,
+                           amazon_name=amazon_name, amazon_price=amazon_price, price_difference=price_difference)
 
 
 if __name__ == '__main__':
